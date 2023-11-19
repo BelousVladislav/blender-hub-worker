@@ -2,6 +2,8 @@
 /dist
 /node_modules
 
+workerid.txt
+
 # Logs
 logs
 *.log

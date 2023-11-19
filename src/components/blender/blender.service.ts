@@ -8,8 +8,8 @@ import { getGPUTier } from 'detect-gpu';
 
 export interface IBlenderInfo {
     blenderVersion: number;
-    blenderOs: string;
-    blenderGpu: string;
+    os: string;
+    gpuName: string;
 }
 
 @Injectable()
@@ -32,10 +32,9 @@ export class BlenderService {
         let gpuResult = await spawnProcess('wmic', ['path', 'win32_VideoController', 'get', 'name']);
         this.blenderInfo = {
             blenderVersion: +blenderResult.message.match(/Blender \d+.\d+/)[0].replace('Blender ', ''),
-            blenderOs: blenderResult.message.match(/\b(Windows|Mac|Linux)\b/)[0],
-            blenderGpu: gpuResult.message.replace(/Name +/, '').match(/[A-Za-z0-9 ]+/)[0].replace('  ', '')
+            os: blenderResult.message.match(/\b(Windows|Mac|Linux)\b/)[0],
+            gpuName: gpuResult.message.replace(/Name +/, '').match(/[A-Za-z0-9 ]+/)[0].replace('  ', '')
         }
-        console.log(this.blenderInfo)
         return this.blenderInfo;
         // if (!this.BLENDER_PATH) {
         // let BLENDER_TAR_XZ = "./blender.tar.xz";
