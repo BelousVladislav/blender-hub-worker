@@ -1,7 +1,7 @@
 import { spawn } from "child_process";
 
 export default async function spawnProcess(command: string, args: Array<string>): Promise<{ code: number, message: string }> {
-    console.log(`Spawning ${command}`);
+    // console.log(`Spawning ${command}`);
 
     return new Promise((resolve, reject) => {
         const cmd = spawn(command, args);

@@ -18,6 +18,7 @@ import path from 'path';
 import { QueueService } from './components/queue/queue.service';
 import { IWorker, IWorkerInfo } from './components/worker/worker.service';
 import { WorkerService } from './components/worker/worker.service';
+import { join } from 'path';
 
 
 // const monitoroQueues = [
@@ -70,8 +71,10 @@ async function bootstrap() {
     console.log(workerInfo);
     // console.log(socketIoClientProvider.getSocket().id);
     await socketIoClientProvider.initWorker(workerInfo);
-    // const queueService = app.get(QueueService);
+    const queueService = app.get(QueueService);
     // queueService.addJob('render', 'renderFile', { fileName: 'monkey.blend' });
+    // queueService.addJob('render', 'renderFile', { renderId: 1007 });
+
     await app.listen(port);
     console.info(`Application is running on: ${await app.getUrl()}`);
     console.info(`Open Queues dashboard: ${await app.getUrl()}/dashboard`);

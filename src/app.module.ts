@@ -13,6 +13,7 @@ import redisConfig from './config/redis.config';
 import { BullBoardModule } from "@bull-board/nestjs";
 import { ExpressAdapter } from "@bull-board/express";
 import { WorkerService } from './components/worker/worker.service';
+import { QueueService } from './components/queue/queue.service';
 @Module({
     imports: [
         ConfigModule.forRoot({

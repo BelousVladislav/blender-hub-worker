@@ -52,6 +52,6 @@ export class WorkerService {
         if (!fs.existsSync('./donate.txt'))
             fs.writeFileSync('./donate.txt', 'BTC=\nETH=\nByMeaCoffe=\nPatreon=');
         donate = fs.readFileSync('./donate.txt').toString()
-        return donate
+        return donate;
     }
 }

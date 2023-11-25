@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Socket, io } from 'socket.io-client';
 import { IWorkerInfo } from '../worker/worker.service';
+import { QueueService } from '../queue/queue.service';
 
 
 @Injectable()
@@ -9,7 +10,10 @@ export class SocketIoClientProvider {
     private socket: Socket;
     private socketId: string;
     private workerInfo: IWorkerInfo;
-    constructor(private readonly config: ConfigService) {
+    constructor(
+        private readonly config: ConfigService,
+        private queueService: QueueService
+    ) {
         // this.connect();
     }
 
@@ -27,6 +31,10 @@ export class SocketIoClientProvider {
         });
         this.socket.on('disconnect', () => {
             console.log(`${this.socketId} disconnected from main server;`)
+        });
+
+        this.socket.on('sendRenderIdToWorker', (renderId: number) => {
+            this.queueService.addJob('render', 'renderFile', { renderId: renderId });
         })
         return this.socket;
     }
