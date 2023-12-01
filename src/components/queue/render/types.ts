@@ -51,7 +51,7 @@ export interface IProject {
     userId: string;
     description: string;
     tags: string;
-    project_uuid: string;
+    uuidToken: string;
     renders: IRender[];
     createdAt: Date;
     updatedAt: Date;
